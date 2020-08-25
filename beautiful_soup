@@ -1,0 +1,18 @@
+import requests
+from bs4 import BeautifulSoup
+
+result = requests.get("https://www.outsurance.co.za")
+print(result.status_code)
+print(result.headers)
+src = result.content
+
+soup = BeautifulSoup(src)
+
+links = soup.find_all("a")
+print(links)
+print("/n")
+
+for link in links:
+    if "About" in link.text:
+        print(link)
+        print(link.attrs['href'])
